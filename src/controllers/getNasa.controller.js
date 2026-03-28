@@ -17,3 +17,36 @@ export const getSolarFlares = async () => {
         console.error("Nasa Fetch Error: ", err);
     }
 }
+
+export const getAlerts = async () => {
+  const url = "https://services.swpc.noaa.gov/products/alerts.json";
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+
+    console.log(data);
+  } catch (err) {
+    console.error("NOAA alerts error:", err);
+  }
+}
+
+export const getKpIndex = async () => {
+  const url = "https://services.swpc.noaa.gov/json/planetary_k_index_1m.json";
+
+  const res = await fetch(url);
+  const data = await res.json();
+
+  const latest = data[data.length - 1];
+
+  console.log("Kp Index:", latest.kp_index);
+}
+
+export const getGeomagneticForecast = async () => {
+  const url = "https://services.swpc.noaa.gov/json/3-day-geomag-forecast.json";
+
+  const res = await fetch(url);
+  const data = await res.json();
+
+  console.log(data);
+}
