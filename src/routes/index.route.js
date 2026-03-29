@@ -51,7 +51,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get("/gunes-firtinalari-nedir", (request, response) => {
-    response.render("info");
+    response.render("Info");
 });
 
 export default router;
