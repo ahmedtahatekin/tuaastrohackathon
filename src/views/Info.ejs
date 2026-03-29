@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Güneş Fırtınaları - Bilgi Sayfası</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Güneş temalı yıldızlar */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(3px 3px at 20px 30px, #ffd700, transparent),
+                radial-gradient(2px 2px at 40px 70px, #ffa500, transparent),
+                radial-gradient(2px 2px at 90px 40px, #ffff00, transparent),
+                radial-gradient(1px 1px at 130px 80px, #ff8c00, transparent),
+                radial-gradient(3px 3px at 200px 20px, #ffd700, transparent),
+                radial-gradient(2px 2px at 250px 160px, #ffa500, transparent);
+            background-repeat: repeat;
+            background-size: 300px 200px;
+            animation: starsTwinkle 25s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes starsTwinkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.2); }
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .sidebar {
+            flex: 0 0 300px;
+            background: rgba(20, 10, 0, 0.9);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 2px solid #ffd700;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.3);
+            position: relative;
+        }
+
+        .home-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(145deg, #ffd700, #ffa500);
+            color: #000;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .home-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .sidebar h2 {
+            color: #ffd700;
+            text-shadow: 0 0 10px #ffd700;
+            margin-bottom: 20px;
+            margin-top: 50px;
+            text-align: center;
+            font-size: 1.4rem;
+        }
+
+        .accordion {
+            margin-top: 20px;
+        }
+
+        .accordion-item {
+            margin-bottom: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #ffa500;
+        }
+
+        .accordion-header {
+            background: linear-gradient(145deg, #2a1810, #3a2410);
+            color: #ffd700;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion-header:hover {
+            background: linear-gradient(145deg, #3a2410, #4a3010);
+        }
+
+        .accordion-header.active {
+            background: linear-gradient(145deg, #ffd700, #ffa500);
+            color: #000;
+        }
+
+        .accordion-content {
+            background: rgba(42, 24, 16, 0.8);
+            color: #ffffff;
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .accordion-content p {
+            padding: 20px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .image-section {
+           margin-left: 10px;
+            flex: 0 0 0px;
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            width: 75%;
+            height: 75%;
+        }
+
+        .content-section {
+            background: rgba(10, 10, 26, 0.9);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 2px solid #ffa500;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(255, 165, 0, 0.3);
+        }
+
+        .content-section h1 {
+            color: #ffd700;
+            text-shadow: 0 0 15px #ffd700;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            text-align: center;
+        }
+
+        .content-section h3 {
+            color: #ffa500;
+            text-shadow: 0 0 10px #ffa500;
+            margin: 25px 0 15px 0;
+            font-size: 1.3rem;
+        }
+
+        .content-section p {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .image-placeholder {
+            padding-right: 20px;
+            background: rgba(20, 10, 0, 0.8);
+            border: 3px dashed #ffd700;
+            border-radius: 15px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: right;
+            justify-content: right;
+            color: #ffd700;
+            font-size: 1.2rem;
+            text-align: right;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 10px;
+                gap: 20px;
+            }
+
+            .sidebar {
+                flex: none;
+                order: 2;
+            }
+
+            .main-content {
+                order: 1;
+            }
+
+            .image-section {
+                order: 3;
+                flex: none;
+            }
+
+            .content-section h1 {
+                font-size: 2rem;
+            }
+
+            .image-placeholder {
+                height: 250px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <button class="home-btn" onclick="window.location.href='index.html'">← Ana Menü</button>
+            <h2>☀️ Güneş Fırtınaları</h2>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        Güneş Fırtınaları Nedir?
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Merhaba! Ben Ruki. Güneş fırtınaları, Güneş'ten çıkan ve Dünya'ya ulaşan güçlü enerji patlamalarıdır. Güneş lekeleri ve koronai kütle atımları gibi olaylar sonucu oluşur.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        Güneş Fırtınalarının Türleri
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Ben Ruki olarak Güneş fırtınalarının türlerini şöyle açıklayayım:<br>
+                        <strong>Koronal Kütle Atımı (CME):</strong> Güneş'ten büyük miktarda plazma fırlatılması<br>
+                        <strong>Güneş Rüzgarı:</strong> Sürekli akan yüklü parçacık akışı<br>
+                        <strong>Güneş Patlaması:</strong> Ani enerji patlaması</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        Güneş Fırtınalarının Etkileri
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Ben Ruki, Güneş fırtınalarının etkilerini şöyle görüyorum:<br>
+                        <strong>Manyetik Fırtına:</strong> Pusula iğnelerinin sapması<br>
+                        <strong>Radyo Kesintileri:</strong> İletişim sorunları<br>
+                        <strong>Güç Kesintileri:</strong> Elektrik şebekesi arızaları<br>
+                        <strong>Uydu Arızaları:</strong> GPS ve iletişim uydularında sorunlar</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        Korunma Yöntemleri
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Ben Ruki olarak korunma yöntemlerini şöyle öneririm:<br>
+                        <strong>Uzay Hava Durumu İzleme:</strong> Güneş gözlem uyduları<br>
+                        <strong>Elektrik Şebekesi Koruması:</strong> Yedek sistemler<br>
+                        <strong>Uydu Yörüngesi Ayarlama:</strong> Tehlikeli dönemlerde<br>
+                        <strong>Erken Uyarı Sistemleri:</strong> Hükümet ve kurumlar için</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        Tarihsel Örnekler
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Ben Ruki, tarihsel örnekleri şöyle hatırlıyorum:<br>
+                        <strong>Carrington Olayı (1859):</strong> Telgraf sistemlerini bozdu<br>
+                        <strong>1989 Quebec Güç Kesintisi:</strong> 6 milyon kişi etkilendi<br>
+                        <strong>2003 Halloween Fırtınaları:</strong> Birkaç gün süren güçlü fırtınalar</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        Hangi Sektörler Etkilenir?
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Ben Ruki, güneş fırtınalarından etkilenen sektörler işte bunlar:<br><br>
+                            <br>
+                        <strong>Uzay ve Uydu Teknolojileri</strong><br>
+                        <strong>Elektrik Sektörü</strong><br>
+                        <strong>Havacılık Sektörü</strong>br
+                        <strong>Telekominikasyon ve IT</strong><br>
+                        <strong>Navigasyon ve Denizcilik</strong><br>
+                        <strong>GPS ve Haritalandırma</strong><br>
+                        <strong>Bilim İnsanları</strong><br>
+                        <strong>Astronotlar</strong>
+                        <p>Güneş fırtınaları dünya genelinde pek çok sektöre olumsuz etkide bulunurlar ancak bu fırtınalardan erken haber alıp hasarı minimalize etmek mümkündür!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="content-section">
+                <h1>☀️ Güneş Fırtınaları</h1>
+
+                <h3>Merhaba! Ben Ruki</h3>
+                <p>Merhaba! Ben Ruki. Güneş fırtınaları hakkında konuşmak için buradayım. Güneş fırtınaları, Güneş'in manyetik aktivitesinin sonucu olarak oluşan büyük enerji patlamalarıdır. Güneş lekeleri, koronai kütle atımları ve güneş patlamaları gibi olaylar Güneş fırtınalarının temel nedenleridir. Bu fırtınalar, Güneş'ten milyonlarca kilometre hızla Dünya'ya doğru yolculuk eder.</p>
+
+                <h3>Neden Önemli?</h3>
+                <p>Güneş fırtınaları, modern teknolojimizi ciddi şekilde etkileyebilir. Elektrik şebekeleri, uydu iletişimleri, GPS sistemleri ve hatta uçak seferleri bu fırtınalardan etkilenebilir. Güneş'in 11 yıllık aktivite döngüsü içinde, yaklaşık her 11 yılda bir büyük fırtınalar yaşanır.</p>
+
+                <h3>Güneş Fırtınalarının Türleri</h3>
+                <p><strong>1. Koronal Kütle Atımı (CME):</strong> Güneş'ten kopan büyük plazma bulutları. Bu bulutlar manyetik alan içerir ve Dünya'ya ulaştığında manyetik fırtınalara neden olur.</p>
+
+                <p><strong>2. Güneş Patlaması:</strong> Güneş yüzeyinde ani enerji patlamaları. Gama ışınları ve X-ışınları salar. Bu patlamalar radyo iletişimini bozar.</p>
+
+                <p><strong>3. Güneş Rüzgarı:</strong> Güneş'ten sürekli akan yüklü parçacık akışı. Güneş'in normal "nefesi" olarak düşünülebilir.</p>
+
+                <h3>Dünya Üzerindeki Etkileri</h3>
+                <p>Güneş fırtınaları Dünya'nın manyetik alanını bozar. Bu durum;</p>
+                <ul>
+                    <li>Kuzey Işıkları'nın daha güneye kadar görünmesine neden olur</li>
+                    <li>Elektrik trafo istasyonlarını aşırı yükler</li>
+                    <li>Uyduların elektronik sistemlerini bozar</li>
+                    <li>Radyo ve televizyon yayınlarını kesintiye uğratır</li>
+                    <li>GPS sistemlerinde hatalara yol açar</li>
+                </ul>
+
+                <h3>Korunma ve Hazırlık</h3>
+                <p>Bilim insanları Güneş'i sürekli izler. NOAA ve ESA gibi kurumlar uzay hava durumu tahminleri yapar. Elektrik şirketleri yedek sistemler hazırlar. Uydular, tehlikeli dönemlerde yörüngelerini değiştirir.</p>
+
+                <p>Güneş fırtınaları, Güneş sisteminin dinamik doğasını gösteren güzel örneklerdir. Hem tehlikeli hem de büyüleyici olaylardır.</p>
+            </div>
+        </div>
+
+        <div class="image-section">
+            <div class="image-placeholder">
+                <div>
+                    <img src="rukimerak.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const arrow = header.querySelector('.arrow');
+            const isActive = header.classList.contains('active');
+
+            // Tüm accordion'ları kapat
+            document.querySelectorAll('.accordion-header').forEach(h => {
+                h.classList.remove('active');
+                h.nextElementSibling.style.maxHeight = '0';
+                h.querySelector('.arrow').textContent = '▼';
+            });
+
+            // Tıklanan accordion'ı aç/kapat
+            if (!isActive) {
+                header.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + 'px';
+                arrow.textContent = '▲';
+            }
+        }
+
+        // Sayfa yüklendiğinde ilk accordion'ı açık tut
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstHeader = document.querySelector('.accordion-header');
+            if (firstHeader) {
+                toggleAccordion(firstHeader);
+            }
+        });
+    </script>
+</body>
+</html>

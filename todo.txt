@@ -1,5 +1,0 @@
-FRONTEND:
-ejs dosyalarınızı views klasörü altında oluşturup kullanacaksınız
-.ejs uzantılı dosyalara html yazacaksınız (örnek: index.html değil index.ejs)
-kullanacağınız static dosyaları(yani javascript ve css) public klasörünün içinde oluşturacaksınız
-
